@@ -19,7 +19,8 @@ Jeonghwan Cheon, Seungdae Baek, and Se-Bum Paik*
 - Expected Installation time is about 60 minutes, but may vary by system conditions.
  
 ### 3. Instructions for demo
-- Run "Main.m" and select result numbers (from 1 to 6) that you want to perform a demo simulation.
+- Edit "Main.m' to select the class of the object-selective units to which perform analysis.
+- Select result numbers (from 1 to 5) that you want to perform a demo simulation.
 - Expected running time is about 5 minutes for each figure, but may vary by system conditions.
 
 ### 4. Expected output for demo
