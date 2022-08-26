@@ -15,7 +15,7 @@ Jeonghwan Cheon, Seungdae Baek, and Se-Bum Paik*
 ### 2. Installation
 - Download all files and folders. ("Clone or download" -> "Download ZIP")
 - Download 'Image.zip' from below link and unzip files in the same directory
-- [Data URL] : TBA
+- [Data URL] : https://drive.google.com/drive/folders/11KLOOW4QfqVQn0DqwGdXoUTyB0xxhmtw
 - Expected Installation time is about 60 minutes, but may vary by system conditions.
  
 ### 3. Instructions for demo
@@ -24,9 +24,8 @@ Jeonghwan Cheon, Seungdae Baek, and Se-Bum Paik*
 
 ### 4. Expected output for demo
 - Below results for untrained AlexNet will be shown.
-  - Result 1)
-  - Result 2) 
-  - Result 3)   
-  - Result 4) 
-  - Result 5) 
-  - Result 6) 
+  - Result 1) Emergence of selectivity to various objects in untrained networks
+  - Result 2) Viewpoint-invariant object selectivity observed in untrained networks
+  - Result 3) Viewpoint-invariant unit and specific units and its visual feature encoding
+  - Result 4) Computational model explains spontaneous emergence of invariance in untrained networks
+  - Result 5) Invariantly tuned unit responses enable invariant object detection
