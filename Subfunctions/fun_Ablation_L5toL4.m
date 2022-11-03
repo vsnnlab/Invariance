@@ -16,11 +16,11 @@ for ii = 1:length(cell_list_L5)
     [IND_C4_rc] = fun_backtracking_C5toC4_XY(net_rand,ind_C5_cell);
     
     i1 = find((IND_C4_rc(:,1)<=0|IND_C4_rc(:,1)>array_sz(indLayer-1,1)));
-    if length(i1)>0
+    if ~isempty(i1)
         IND_C4_rc(i1,:) = []; tmp_IND_rc(i1,:) = [];
     end
     i2 = find((IND_C4_rc(:,2)<=0|IND_C4_rc(:,2)>array_sz(indLayer-1,1)));
-    if length(i2)>0
+    if ~isempty(i2)
         IND_C4_rc(i2,:) = []; tmp_IND_rc(i2,:) = [];
     end
     
@@ -47,7 +47,7 @@ for ii = 1:length(cell_list_L5)
     [~, idx] = ismember(cell_list_L4, tmp_IND_C4);
     idx(idx == 0) = [];
     
-    if reverse && length(idx)~=0
+    if reverse && ~isempty(idx)
         tmp = setdiff(1:1:1728, idx);
         tmp = tmp(randperm(length(idx)));
         idx = tmp;

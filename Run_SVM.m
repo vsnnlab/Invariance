@@ -1,12 +1,16 @@
-%% Result 5
-%  Invariantly tuned unit responses enable invariant object detection
+% Result 4: Invariantly tuned unit responses enable invariant object detection
 
-%% Detection of face images using the response of face units in untrained networks (Fig.3, Fig.S11-12) 
+%% Perform SVM analysis or load saved result
+filename = strcat('./Result/RESULT_SVM_', target_class, '_', var_type, '.mat');
+
+if exist(filename) == 0
+disp(['Perform PFI analysis ...'])
+
 RESULT_SVM = cell(5,1);
 
 for nn=1:NN
     tic
-    %% Train SVM using response of an untrained network (Fig 3b-d)
+    %% Train SVM using response of an untrained network
     net_rand = Cell_Net{nn};                                                % untrained AlexNet                                                    
     num_cell = prod(array_sz(layerArray(length(layerArray)),:));
     
@@ -42,7 +46,7 @@ for nn=1:NN
     p2 = zeros(num_cell,1); for mm = 1:num_cell;p2(mm) = anova1(actORIre(mm,:),arrayClass,'off');end
     Idx_NS = intersect(find(p>0.9),find(p>0.9));
     
-    %%% Task1: Test1 vs Test 2 (Specific unit and invariant unit)
+    %% Task1: Test1 vs Test 2 (Specific unit and invariant unit)
     % Invariant, Test 1
     cell_list = Idx_Inv;
     array_SVM = zeros(1,reN);
@@ -98,7 +102,7 @@ for nn=1:NN
     end
     RESULT_SVM{1}(nn, 6) = mean(array_SVM);
     
-    view_array = [180];
+    view_array = 0:30:180;
     for view_idx=1:length(view_array)
         Conv5 
         
@@ -147,39 +151,94 @@ for nn=1:NN
         RESULT_SVM{5}(nn, view_idx) = mean(array_SVM);
     end
     toc
-    
-    filename = strcat('RESULT_SVM_', target_class, '_',var_type, '.mat');
-    save(filename,'RESULT_SVM');
+end
+save(filename, 'RESULT_SVM');
+else
+load(filename);
 end
 
-%{
-figure('units','normalized','outerposition',[0 0.5 1 0.5]); drawnow
-sgtitle('Object detection task using the response of object-selective units')
+figure('units','normalized','outerposition',[0 0.7 0.7 0.7]); drawnow
+sgtitle('Invariantly tuned unit responses enable invariant object detection')
 
-subplot(1, 3, 1);
-errorbar([1, 2, 3, 4], ...
-    [mean(SVM_Result{1, 1}), mean(SVM_Result{1, 2}), mean(SVM_Result{1, 3}), mean(SVM_Result{1, 4})], ...
-    [std(SVM_Result{1, 1}), std(SVM_Result{1, 2}), std(SVM_Result{1, 3}), std(SVM_Result{1, 4})])
-xticks([1, 2, 3, 4]);
-xticklabels({'Train1/Inv', 'Train2/Inv', 'Train1/Spec', 'Train2/Spec'});
-yline(0.5, '--');
-ylabel("Correct ratio");
+data_length = size(RESULT_SVM{1},1);
 
-subplot(1, 3, 2);
-errorbar([1, 2, 3, 4], ...
-    [mean(SVM_Result{2, 1}), mean(SVM_Result{1, 2}), mean(SVM_Result{1, 4}), mean(SVM_Result{2, 2})], ...
-    [std(SVM_Result{2, 1}), std(SVM_Result{1, 2}), std(SVM_Result{1, 4}), std(SVM_Result{2, 2})])
-xticks([1, 2, 3, 4]);
-xticklabels({'All units', 'Inv', 'Spe', 'NS'});
-yline(0.5, '--');
-ylabel("Correct ratio");
+%% SVM trainte with multi- or single-viewpoint stimuli (Figure 5B)
+subplot(2, 2, 1);
 
-subplot(1, 3, 3);
-plot([0, 30], [mean(SVM_Result{2, 1}), mean(SVM_Result{1, 2}), mean(SVM_Result{1, 4}), mean(SVM_Result{2, 2})], ...
-    [std(SVM_Result{2, 1}), std(SVM_Result{1, 2}), std(SVM_Result{1, 4}), std(SVM_Result{2, 2})])
-xticks([1, 2, 3, 4]);
-xticklabels(['All units', 'Inv', 'Spe', 'NS']);
-yline(0.5, '--');
-ylabel("Correct ratio");
-%}
+face_color = {'white', color_red, 'white', color_blue};
+edge_color = {color_red, 'white', color_blue, 'white'};
+hold on;
+for ii=1:4
+    data = mean(RESULT_SVM{1}(:,ii));
+    err = std(RESULT_SVM{1}(:,ii));
+    h = bar(ii, data);
+    set(h,'FaceColor',char(face_color(ii)), 'EdgeColor', char(edge_color(ii)), 'LineWidth', 1.5);
+    
+    er = errorbar(ii, data, err, err);
+    er.Color = [0 0 0];
+    er.LineStyle = 'none';
+end
+hold off;
+ylim([0.4 1.0]);
+yline(0.5, '--', 'Chance level');
+ylabel('Correct ratio');
+xticks(1:4);
+xticklabels({'Train1', 'Train2', 'Train1', 'Train2'});
+title('SVM trainte with multi- or single-viewpoint stimuli');
 
+%% SVM trained with single-viewpoint stimuli (Train 2, Figure 5C)
+subplot(2, 2, 2);
+face_color = {color_red, color_blue, color_gray};
+plot_target = [2 4 6];
+hold on
+for ii=1:3
+    data = mean(RESULT_SVM{1}(:,plot_target(ii)));
+    err = std(RESULT_SVM{1}(:,plot_target(ii)));
+    h = bar(ii, data);
+    set(h,'FaceColor',char(face_color(ii)));
+    
+    er = errorbar(ii, data, err, err);
+    er.Color = [0 0 0];
+    er.LineStyle = 'none';
+end
+hold off;
+ylim([0.4 1.0]);
+yline(0.5, '--', 'Chance level');
+ylabel('Correct ratio');
+yline(mean(RESULT_SVM{1}(:,5)), '--', 'All units (Conv5)')
+xticks(1:3);
+xticklabels({'Invariant\newline{units}', 'Specific\newline{units (0°)}', 'Non-selective\newline{units}'});
+title('SVM trained with single-viewpoint stimuli');
+
+%% SVM trained with single-viewpoint stimuli test by various ranges (Train 2, Figure 5D)
+subplot(2, 2, 3);
+summary = [];
+face_color = {'r', 'b', 'b', 'k'};
+hold on;
+for jj=1:4
+    shadedErrorBar(0:30:180, mean(RESULT_SVM{1+jj}(:,:)), std(RESULT_SVM{1+jj}(:,:)),'Lineprops',char(face_color(jj)));
+    summary = [summary, RESULT_SVM{1+jj}(:,7)];
+end
+hold off;
+ylim([0.4 1.0]);
+xticks(0:30:180);
+xlabel('Test image variation range (deg)');
+ylabel('Correct ratio');
+title('SVM trained with single-viewpoint stimuli test by various ranges');
+legend({'','Invariant\newline{units}','','All specific\newline{units}', ...
+    '','Specific\newline{units (0°)}', '','Non-selective\newline{units}'}, ...
+    'Location', 'southwest');
+
+%% Performance using different types of unit (Train 2, Figure 5E)
+subplot(2, 2, 4);
+hold on;
+    errorbar(1:4, mean(summary), std(summary), '-', color='k');
+    plot(1:4, mean(summary), 'o', color='r');
+hold off;
+xlim([0.5 4.5]);
+ylim([0.4 1.0]);
+xticks(1:4);
+xticklabels({'Invariant\newline{units}','All specific\newline{units}', ...
+    'Specific\newline{units (0°)}', 'Non-selective\newline{units}'});
+ylabel('Correct ratio');
+title('Performance using different types of unit');

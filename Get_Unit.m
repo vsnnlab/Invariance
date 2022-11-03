@@ -1,3 +1,5 @@
+% Randomly initialized AlexNet and object-selective units
+
 %% Setting parameters
 
 % Simulation parameter
