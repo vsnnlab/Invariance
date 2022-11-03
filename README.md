@@ -15,7 +15,7 @@ Jeonghwan Cheon, Seungdae Baek, and Se-Bum Paik*
 ### 2. Installation
 - Download all files and folders. ("Clone or download" -> "Download ZIP")
 - Download 'Image.zip' from below link and unzip files in the same directory
-- [Data URL] : https://drive.google.com/drive/folders/11KLOOW4QfqVQn0DqwGdXoUTyB0xxhmtw
+- Dataset Download: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7276304.svg)](https://doi.org/10.5281/zenodo.7276304)
 - Expected Installation time is about 60 minutes, but may vary by system conditions.
  
 ### 3. Instructions for demo
