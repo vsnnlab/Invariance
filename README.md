@@ -34,13 +34,13 @@ Jeonghwan Cheon, Seungdae Baek, and Se-Bum Paik*
 ### 5. Citation
 ```bibtex
 @ARTICLE{10.3389/fncom.2022.1030707,
-	AUTHOR={Cheon, Jeonghwan and Baek, Seungdae and Paik, Se-Bum},
-	TITLE={Invariance of object detection in untrained deep neural networks},
-	JOURNAL={Frontiers in Computational Neuroscience},
-	VOLUME={16},
-	YEAR={2022},
-	URL={https://www.frontiersin.org/articles/10.3389/fncom.2022.1030707},
-	DOI={10.3389/fncom.2022.1030707},
-	ISSN={1662-5188}
+  AUTHOR={Cheon, Jeonghwan and Baek, Seungdae and Paik, Se-Bum},
+  TITLE={Invariance of object detection in untrained deep neural networks},
+  JOURNAL={Frontiers in Computational Neuroscience},
+  VOLUME={16},
+  YEAR={2022},
+  URL={https://www.frontiersin.org/articles/10.3389/fncom.2022.1030707},
+  DOI={10.3389/fncom.2022.1030707},
+  ISSN={1662-5188}
 }
 ```
