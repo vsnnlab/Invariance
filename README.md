@@ -25,11 +25,11 @@ Jeonghwan Cheon, Seungdae Baek, and Se-Bum Paik*
 
 ### 4. Expected output for demo
 - Below results for untrained AlexNet will be shown.
-  - Result 1) Emergence of selectivity to various objects in untrained networks
-  - Result 2) Viewpoint-invariant object selectivity observed in untrained networks
-  - Result 3) Viewpoint-invariant unit and specific units and its visual feature encoding
-  - Result 4) Computational model explains spontaneous emergence of invariance in untrained networks
-  - Result 5) Invariantly tuned unit responses enable invariant object detection
+  - ``` Run_Selectivity.m ```: Result 1. Emergence of selectivity to various objects in untrained networks
+  - ``` Run_Invariance.m ```: Result 2. Viewpoint-invariant object selectivity observed in untrained networks
+  - ``` Run_PFI.m ```: Result 3. Viewpoint-invariant unit and specific units and its visual feature encoding
+  - ``` Run_Connectivity.m ```: Result 4. Computational model explains spontaneous emergence of invariance in untrained networks
+  - ``` Run_SVM.m ```: Result 5. Invariantly tuned unit responses enable invariant object detection
 
 ### 5. Citation
 ```bibtex
